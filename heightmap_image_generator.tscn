@@ -38,6 +38,7 @@ size_flags_stretch_ratio = 0.6
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,11 +139,17 @@ text = "Amplitude
 "
 
 [node name="AmplitudeSlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
+size_flags_horizontal = 2
 max_value = 5.0
 step = 0.001
+
+[node name="AmplitudeValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0.5"
 
 [node name="FrequencyContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -153,10 +160,18 @@ layout_mode = 2
 text = "Frequency"
 
 [node name="FrequencySlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
+size_flags_horizontal = 2
+min_value = 0.01
+max_value = 0.5
 step = 0.0
+value = 0.01
+
+[node name="FrequencyValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer"]
+clip_contents = true
+layout_mode = 2
+text = "0.1"
 
 [node name="OctavesContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -166,9 +181,17 @@ layout_mode = 2
 text = "Octaves"
 
 [node name="OctavesSlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 max_value = 10.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="OctavesValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer"]
+clip_contents = true
+layout_mode = 2
+text = "1"
 
 [node name="PersistanceContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -178,11 +201,17 @@ layout_mode = 2
 text = "Persistance"
 
 [node name="PersistanceSlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistanceContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-min_value = -1.0
-max_value = 1.0
+size_flags_horizontal = 2
+min_value = -4.0
+max_value = 4.0
 step = 0.001
+
+[node name="PersistanceValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistanceContainer"]
+clip_contents = true
+layout_mode = 2
+text = "0.5"
 
 [node name="LacunarityContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -192,11 +221,17 @@ layout_mode = 2
 text = "Lacunarity"
 
 [node name="LacunaritySlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 min_value = -1.0
 max_value = 1.0
 step = 0.001
+
+[node name="LacunarityValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer"]
+clip_contents = true
+layout_mode = 2
+text = "0.5"
 
 [node name="OffsetContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -210,18 +245,35 @@ layout_mode = 2
 text = "x:"
 
 [node name="XSlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
+custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 max_value = 1000.0
+
+[node name="XOffsetValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+text = "20"
+
+[node name="VSeparator" type="VSeparator" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
+layout_mode = 2
 
 [node name="YLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
 layout_mode = 2
 text = "y:"
 
 [node name="YSlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
+custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 max_value = 1000.0
+
+[node name="YOffsetValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+text = "20"
 
 [node name="InvertedContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -262,11 +314,18 @@ size_flags_horizontal = 3
 [connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/WidthContainer/WidthLineEdit" to="MainInterface/HeightmapImageGenerator" method="_width_changed"]
 [connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/HeightContainer/HeightLineEdit" to="MainInterface/HeightmapImageGenerator" method="_height_changed"]
 [connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SeedContainer/SeedLineEdit" to="MainInterface/HeightmapImageGenerator" method="_seed_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer/AmplitudeSlider" to="MainInterface" method="_amplitude_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer/AmplitudeSlider" to="MainInterface/HeightmapImageGenerator" method="_amplitude_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer/FrequencySlider" to="MainInterface" method="_frequency_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer/FrequencySlider" to="MainInterface/HeightmapImageGenerator" method="_frequency_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer/OctavesSlider" to="MainInterface" method="_octaves_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer/OctavesSlider" to="MainInterface/HeightmapImageGenerator" method="_octaves_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistanceContainer/PersistanceSlider" to="MainInterface" method="_persistance_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistanceContainer/PersistanceSlider" to="MainInterface/HeightmapImageGenerator" method="_persistance_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer/LacunaritySlider" to="MainInterface" method="_lacunarity_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer/LacunaritySlider" to="MainInterface/HeightmapImageGenerator" method="_lacunarity_slider"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/XSlider" to="MainInterface" method="_x_offset_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/XSlider" to="MainInterface/HeightmapImageGenerator" method="_x_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/YSlider" to="MainInterface" method="_y_offset_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/YSlider" to="MainInterface/HeightmapImageGenerator" method="_y_changed"]
 [connection signal="toggled" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/InvertedContainer/InvertedCheckBox" to="MainInterface/HeightmapImageGenerator" method="_inverted_changed"]
