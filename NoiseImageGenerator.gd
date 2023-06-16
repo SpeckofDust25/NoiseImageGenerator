@@ -95,6 +95,9 @@ func get_y_offset()-> float:
 func get_inverted()-> bool:
 	return inverted;
 
+func get_image() -> Image:
+	return image;
+
 #Connections
 func _noise_type_changed(index):
 	noise_type = noise_type_array[index];

@@ -16,6 +16,9 @@ var x_offset_slider: HSlider;
 var y_offset_slider: HSlider;
 var inverted_checkbox: CheckBox;
 
+#Saving
+var save_png_button: Button;
+
 #Labels
 var amplitude_value_label: Label;
 var frequency_value_label: Label;
@@ -28,7 +31,7 @@ var y_offset_value_label: Label;
 #Initialize
 func _ready():
 	var properties = get_node("HBoxContainer/TabContainer/Properties");
-	heightmap_image_generator = get_node("HeightmapImageGenerator");
+	heightmap_image_generator = get_node("NoiseImageGenerator");
 	noise_type_option_button = properties.get_node("HBoxContainer/VBoxContainer/NoiseTypeContainer/NoiseTypeOptionButton");
 	width_line_edit = properties.get_node("HBoxContainer/VBoxContainer/WidthContainer/WidthLineEdit");
 	height_line_edit = properties.get_node("HBoxContainer/VBoxContainer/HeightContainer/HeightLineEdit");
@@ -49,6 +52,8 @@ func _ready():
 	lacunarity_value_label = properties.get_node("HBoxContainer/VBoxContainer/LacunarityContainer/LacunarityValueLabel");
 	x_offset_value_label = properties.get_node("HBoxContainer/VBoxContainer/OffsetContainer/XOffsetValueLabel");
 	y_offset_value_label = properties.get_node("HBoxContainer/VBoxContainer/OffsetContainer/YOffsetValueLabel");
+	
+	save_png_button = properties.get_node("HBoxContainer/VBoxContainer/SavePngContainer/SavePngButton")
 	
 	width_line_edit.text = str(heightmap_image_generator.get_width());
 	height_line_edit.text = str(heightmap_image_generator.get_height());
@@ -90,3 +95,20 @@ func _x_offset_changed(value):
 
 func _y_offset_changed(value):
 	y_offset_value_label.set_text(str(value));
+
+func _save_button_pressed():
+	if (heightmap_image_generator.has_method("get_image")):
+		var image: Image = heightmap_image_generator.get_image();
+		var save_path: String = "";
+		
+		if (OS.has_feature("editor")):
+			save_path = "res://Images/" + Time.get_datetime_string_from_system(false, false).replace(":", "_") + ".png";
+			if (!DirAccess.dir_exists_absolute("res://Images")):
+				DirAccess.make_dir_absolute("res://Images");
+		else:
+			save_path = OS.get_executable_path().get_base_dir() + "/Images/" + Time.get_datetime_string_from_system(false, false).replace(":", "_") + ".png";
+			
+			if (!DirAccess.dir_exists_absolute(OS.get_executable_path().get_base_dir() + "/Images")):
+				DirAccess.make_dir_absolute(OS.get_executable_path().get_base_dir() + "/Images");
+		
+		image.save_png(save_path);

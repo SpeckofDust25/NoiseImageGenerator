@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bovxu02vbl8cn"]
+[gd_scene load_steps=3 format=3 uid="uid://ba0wd0ruwo3r"]
 
-[ext_resource type="Script" path="res://MainInterface.gd" id="1_b0bbv"]
-[ext_resource type="Script" path="res://HeightmapImageGenerator.gd" id="1_y0gqr"]
+[ext_resource type="Script" path="res://MainInterface.gd" id="1_d6kfn"]
+[ext_resource type="Script" path="res://NoiseImageGenerator.gd" id="2_v3hyi"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -14,10 +14,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_b0bbv")
+script = ExtResource("1_d6kfn")
 
-[node name="HeightmapImageGenerator" type="Node" parent="MainInterface"]
-script = ExtResource("1_y0gqr")
+[node name="NoiseImageGenerator" type="Node" parent="MainInterface"]
+script = ExtResource("2_v3hyi")
 width = 500
 height = 500
 
@@ -57,6 +57,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="HSeparator" type="HSeparator" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="MenuTitle" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
@@ -127,6 +128,7 @@ layout_mode = 2
 virtual_keyboard_type = 2
 
 [node name="HSeparator2" type="HSeparator" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="AmplitudeContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
@@ -286,14 +288,22 @@ text = "Inverted"
 layout_mode = 2
 action_mode = 0
 
+[node name="HSeparator3" type="HSeparator" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="SavePngContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SavePngButton" type="Button" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SavePngContainer"]
+layout_mode = 2
+text = "Save Image .png"
+
 [node name="VSeparator" type="VSeparator" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer"]
 layout_mode = 2
 
 [node name="Color" type="TabBar" parent="MainInterface/HBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Export" type="TabBar" parent="MainInterface/HBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 
@@ -310,22 +320,23 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[connection signal="item_selected" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/NoiseTypeContainer/NoiseTypeOptionButton" to="MainInterface/HeightmapImageGenerator" method="_noise_type_changed"]
-[connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/WidthContainer/WidthLineEdit" to="MainInterface/HeightmapImageGenerator" method="_width_changed"]
-[connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/HeightContainer/HeightLineEdit" to="MainInterface/HeightmapImageGenerator" method="_height_changed"]
-[connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SeedContainer/SeedLineEdit" to="MainInterface/HeightmapImageGenerator" method="_seed_changed"]
+[connection signal="item_selected" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/NoiseTypeContainer/NoiseTypeOptionButton" to="MainInterface/NoiseImageGenerator" method="_noise_type_changed"]
+[connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/WidthContainer/WidthLineEdit" to="MainInterface/NoiseImageGenerator" method="_width_changed"]
+[connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/HeightContainer/HeightLineEdit" to="MainInterface/NoiseImageGenerator" method="_height_changed"]
+[connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SeedContainer/SeedLineEdit" to="MainInterface/NoiseImageGenerator" method="_seed_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer/AmplitudeSlider" to="MainInterface" method="_amplitude_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer/AmplitudeSlider" to="MainInterface/HeightmapImageGenerator" method="_amplitude_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer/AmplitudeSlider" to="MainInterface/NoiseImageGenerator" method="_amplitude_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer/FrequencySlider" to="MainInterface" method="_frequency_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer/FrequencySlider" to="MainInterface/HeightmapImageGenerator" method="_frequency_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer/FrequencySlider" to="MainInterface/NoiseImageGenerator" method="_frequency_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer/OctavesSlider" to="MainInterface" method="_octaves_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer/OctavesSlider" to="MainInterface/HeightmapImageGenerator" method="_octaves_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer/OctavesSlider" to="MainInterface/NoiseImageGenerator" method="_octaves_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistanceContainer/PersistanceSlider" to="MainInterface" method="_persistance_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistanceContainer/PersistanceSlider" to="MainInterface/HeightmapImageGenerator" method="_persistance_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistanceContainer/PersistanceSlider" to="MainInterface/NoiseImageGenerator" method="_persistance_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer/LacunaritySlider" to="MainInterface" method="_lacunarity_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer/LacunaritySlider" to="MainInterface/HeightmapImageGenerator" method="_lacunarity_slider"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer/LacunaritySlider" to="MainInterface/NoiseImageGenerator" method="_lacunarity_slider"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/XSlider" to="MainInterface" method="_x_offset_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/XSlider" to="MainInterface/HeightmapImageGenerator" method="_x_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/XSlider" to="MainInterface/NoiseImageGenerator" method="_x_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/YSlider" to="MainInterface" method="_y_offset_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/YSlider" to="MainInterface/HeightmapImageGenerator" method="_y_changed"]
-[connection signal="toggled" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/InvertedContainer/InvertedCheckBox" to="MainInterface/HeightmapImageGenerator" method="_inverted_changed"]
+[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/YSlider" to="MainInterface/NoiseImageGenerator" method="_y_changed"]
+[connection signal="toggled" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/InvertedContainer/InvertedCheckBox" to="MainInterface/NoiseImageGenerator" method="_inverted_changed"]
+[connection signal="pressed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SavePngContainer/SavePngButton" to="MainInterface" method="_save_button_pressed"]

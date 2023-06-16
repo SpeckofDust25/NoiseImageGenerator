@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="HeightmapImageGenerator"
-run/main_scene="res://heightmap_image_generator.tscn"
+config/name="NoiseImageGenerator"
+run/main_scene="res://NoiseImageGenerator.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Images/Icons/Icon (1).ico"
+config/macos_native_icon="res://Images/Icons/Icon.png"
+config/windows_native_icon="res://Images/Icons/Icon (1).ico"
 
 [rendering]
 
