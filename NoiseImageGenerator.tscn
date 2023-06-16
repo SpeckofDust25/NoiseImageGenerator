@@ -30,11 +30,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TabContainer" type="TabContainer" parent="MainInterface/HBoxContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
 
 [node name="Properties" type="TabBar" parent="MainInterface/HBoxContainer/TabContainer"]
+clip_contents = true
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties"]
@@ -44,15 +46,13 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
-offset_right = 4.0
+offset_right = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer"]
-layout_mode = 2
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -62,7 +62,7 @@ layout_mode = 2
 
 [node name="MenuTitle" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Heightmap Properties"
+text = "Noise Properties"
 horizontal_alignment = 1
 
 [node name="NoiseTypeContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
@@ -256,7 +256,8 @@ max_value = 1000.0
 clip_contents = true
 custom_minimum_size = Vector2(38, 0)
 layout_mode = 2
-text = "20"
+text = "0
+"
 
 [node name="VSeparator" type="VSeparator" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
 layout_mode = 2
@@ -275,7 +276,7 @@ max_value = 1000.0
 clip_contents = true
 custom_minimum_size = Vector2(38, 0)
 layout_mode = 2
-text = "20"
+text = "0"
 
 [node name="InvertedContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -300,14 +301,8 @@ alignment = 1
 layout_mode = 2
 text = "Save Image .png"
 
-[node name="VSeparator" type="VSeparator" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer"]
-layout_mode = 2
-
-[node name="Color" type="TabBar" parent="MainInterface/HBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-
 [node name="Control" type="Control" parent="MainInterface/HBoxContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 
