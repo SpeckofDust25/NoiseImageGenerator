@@ -10,7 +10,7 @@ FastNoiseLite.TYPE_SIMPLEX_SMOOTH, FastNoiseLite.TYPE_VALUE, FastNoiseLite.TYPE_
 @export var seed: float = 0;
 @export var amplitude: float = 1;
 @export var frequency: float = 0.1;
-@export_range(0, 1) var persistance: float = 0.1;
+@export_range(0, 1) var persistence: float = 0.1;
 @export var lacunarity: float = 0.1;
 @export var octaves: int = 1;
 @export var x_offset: int = 0;
@@ -35,7 +35,7 @@ func set_noise_values():
 	noise.set_noise_type(noise_type);
 	noise.set_seed(seed);
 	noise.set_frequency(frequency);
-	noise.set_fractal_gain(persistance);
+	noise.set_fractal_gain(persistence);
 	noise.set_fractal_lacunarity(lacunarity);
 	noise.set_fractal_octaves(octaves);
 
@@ -80,8 +80,8 @@ func get_seed()-> float:
 func get_octaves()-> int:
 	return octaves;
 
-func get_persistance()-> float:
-	return persistance;
+func get_persistence()-> float:
+	return persistence;
 
 func get_lacunarity()-> float:
 	return lacunarity;
@@ -129,8 +129,8 @@ func _octaves_changed(value):
 	octaves = value;
 	generate();
 
-func _persistance_changed(value):
-	persistance = value;
+func _persistence_changed(value):
+	persistence = value;
 	generate();
 
 func _lacunarity_slider(value):
