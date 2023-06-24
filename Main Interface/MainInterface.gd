@@ -1,5 +1,14 @@
 extends Control
 
+signal update_noise;
+
+#Preloads
+var pre_color_container: PackedScene = preload("res://Interface Addons/color_container.tscn");
+
+#Module Containers
+var color_container_list: Array;
+
+#Main Nodes
 var noise_image_generator: Node;
 
 #Control Interactions
@@ -27,6 +36,9 @@ var persistence_value_label: Label;
 var lacunarity_value_label: Label;
 var x_offset_value_label: Label;
 var y_offset_value_label: Label;
+
+#Colors Tab
+var color_list_main_container: VBoxContainer;
 
 #Initialize
 func _ready():
@@ -66,13 +78,35 @@ func _ready():
 	x_offset_slider.value = noise_image_generator.get_x_offset();
 	y_offset_slider.value = noise_image_generator.get_y_offset();
 	inverted_checkbox.button_pressed = noise_image_generator.get_inverted();
+	
+	#Color Tab
+	color_list_main_container = get_node("HBoxContainer/TabContainer/Color/VBoxContainer/ColorInterfaceContainer/ColorListContainer");
 
-#Connections
+func _process(delta):
+	#Color Tab: Update Colors
+	if (color_container_list.size() > 0):
+		for i in range(0, color_container_list.size()):
+			if (color_container_list[i] == null):
+				color_container_list.remove_at(i);
+				break;
+		
+		for i in color_container_list:
+			if (i.has_node("ColorPickerButton") and i.has_node("ValueSlider")):
+				var color: Color = i.get_node("ColorPickerButton").get_pick_color();
+				var value: float = i.get_node("ValueSlider").get_value();
+
+#Getters
+func get_color_containers() -> Array:
+	return color_container_list;
+
+#Properties Tab Connections
 func _amplitude_changed(value):
 	amplitude_value_label.set_text(str(value));
+	emit_signal("update_noise", self);
 
 func _frequency_changed(value):
 	frequency_value_label.set_text(str("%.2f" % value));
+	emit_signal("update_noise", self);
 
 func _octaves_changed(value):
 	octaves_value_label.set_text(str(value));
@@ -83,18 +117,24 @@ func _octaves_changed(value):
 	else:
 		lacunarity_slider.set_editable(false);
 		persistence_slider.set_editable(false);
+	
+	emit_signal("update_noise", self);
 
 func _persistence_changed(value):
 	persistence_value_label.set_text(str(value));
+	emit_signal("update_noise", self);
 
 func _lacunarity_changed(value):
 	lacunarity_value_label.set_text(str(value));
+	emit_signal("update_noise", self);
 
 func _x_offset_changed(value):
 	x_offset_value_label.set_text(str(value));
+	emit_signal("update_noise", self);
 
 func _y_offset_changed(value):
 	y_offset_value_label.set_text(str(value));
+	emit_signal("update_noise", self);
 
 func _save_button_pressed():
 	if (noise_image_generator.has_method("get_image")):
@@ -112,3 +152,27 @@ func _save_button_pressed():
 				DirAccess.make_dir_absolute(OS.get_executable_path().get_base_dir() + "/Images");
 		
 		image.save_png(save_path);
+
+#Color Tab Connnections
+func _add_color_container():
+	var color_container = pre_color_container.instantiate();
+	color_list_main_container.add_child(color_container);
+	
+	#Connect to Signals
+	if (color_container.has_node("ColorPickerButton") and color_container.has_node("ValueSlider")):
+		color_container.get_node("ValueSlider").connect("value_changed", _color_value_changed);
+		color_container.get_node("ColorPickerButton").connect("color_changed", _color_changed);
+		color_container.get_node("DeleteButton").connect("tree_exited", _delete_button);
+	else:
+		print_debug("Can't Find ColorPickerButton and ValueSlider Nodes");
+	
+	color_container_list.push_back(color_container);
+
+func _delete_button(): 
+	emit_signal("update_noise", self);
+
+func _color_changed(color: Color):
+	emit_signal("update_noise", self);
+
+func _color_value_changed(value: float):
+	emit_signal("update_noise", self);

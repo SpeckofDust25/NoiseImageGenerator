@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cm25jyq7u8dge"]
+
+[node name="NoiseTypeContainer" type="HBoxContainer"]
+offset_right = 258.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+
+[node name="NoiseTypeLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Noise Type"
+
+[node name="NoiseTypeOptionButton" type="OptionButton" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+item_count = 6
+selected = 0
+popup/item_0/text = "Perlin"
+popup/item_0/id = 3
+popup/item_1/text = "Cellular"
+popup/item_1/id = 2
+popup/item_2/text = "Simplex"
+popup/item_2/id = 0
+popup/item_3/text = "Simplex Smooth"
+popup/item_3/id = 1
+popup/item_4/text = "Value"
+popup/item_4/id = 5
+popup/item_5/text = "Cubic"
+popup/item_5/id = 4

@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://da5iu45l3s3qp"]
+
+[ext_resource type="Script" path="res://Interface Addons/AddSeed.gd" id="1_1iox6"]
+
+[node name="SeedContainer" type="HBoxContainer"]
+alignment = 1
+script = ExtResource("1_1iox6")
+
+[node name="SeedLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Seed"
+
+[node name="SubtractSeed" type="Button" parent="."]
+layout_mode = 2
+text = " - "
+
+[node name="SeedLineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+virtual_keyboard_type = 2
+
+[node name="AddSeed" type="Button" parent="."]
+layout_mode = 2
+text = " + "
+
+[connection signal="pressed" from="SubtractSeed" to="." method="_on_subtract_seed_pressed"]
+[connection signal="pressed" from="AddSeed" to="." method="_on_add_seed_pressed"]

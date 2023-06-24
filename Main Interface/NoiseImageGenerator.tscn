@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba0wd0ruwo3r"]
+[gd_scene load_steps=5 format=3 uid="uid://b0jxwr5guftih"]
 
-[ext_resource type="Script" path="res://MainInterface.gd" id="1_d6kfn"]
-[ext_resource type="Script" path="res://NoiseImageGenerator.gd" id="2_v3hyi"]
+[ext_resource type="Script" path="res://Main Interface/MainInterface.gd" id="1_d6kfn"]
+[ext_resource type="Script" path="res://Main Interface/NoiseImageGenerator.gd" id="2_v3hyi"]
+[ext_resource type="PackedScene" uid="uid://cm25jyq7u8dge" path="res://Interface Addons/noise_type_container.tscn" id="3_dqc6v"]
+[ext_resource type="PackedScene" uid="uid://da5iu45l3s3qp" path="res://Interface Addons/seed_container.tscn" id="4_2cwsj"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -22,6 +24,7 @@ width = 500
 height = 500
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainInterface"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,10 +37,12 @@ clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
+drag_to_rearrange_enabled = true
 
 [node name="Properties" type="TabBar" parent="MainInterface/HBoxContainer/TabContainer"]
 clip_contents = true
 layout_mode = 2
+drag_to_rearrange_enabled = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties"]
 clip_contents = true
@@ -56,40 +61,15 @@ clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSeparator" type="HSeparator" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
 [node name="MenuTitle" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Noise Properties"
 horizontal_alignment = 1
+vertical_alignment = 2
 
-[node name="NoiseTypeContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
+[node name="NoiseTypeContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer" instance=ExtResource("3_dqc6v")]
 layout_mode = 2
-
-[node name="NoiseTypeLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/NoiseTypeContainer"]
-layout_mode = 2
-text = "Noise Type"
-
-[node name="NoiseTypeOptionButton" type="OptionButton" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/NoiseTypeContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-item_count = 6
-selected = 0
-popup/item_0/text = "Perlin"
-popup/item_0/id = 3
-popup/item_1/text = "Cellular"
-popup/item_1/id = 2
-popup/item_2/text = "Simplex"
-popup/item_2/id = 0
-popup/item_3/text = "Simplex Smooth"
-popup/item_3/id = 1
-popup/item_4/text = "Value"
-popup/item_4/id = 5
-popup/item_5/text = "Cubic"
-popup/item_5/id = 4
 
 [node name="WidthContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -115,17 +95,8 @@ text = "Height"
 layout_mode = 2
 virtual_keyboard_type = 2
 
-[node name="SeedContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
+[node name="SeedContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer" instance=ExtResource("4_2cwsj")]
 layout_mode = 2
-alignment = 1
-
-[node name="SeedLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SeedContainer"]
-layout_mode = 2
-text = "Seed"
-
-[node name="SeedLineEdit" type="LineEdit" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SeedContainer"]
-layout_mode = 2
-virtual_keyboard_type = 2
 
 [node name="HSeparator2" type="HSeparator" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
@@ -143,15 +114,18 @@ text = "Amplitude
 [node name="AmplitudeSlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 max_value = 5.0
 step = 0.001
+value = 1.0
 
 [node name="AmplitudeValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer"]
 clip_contents = true
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-text = "0.5"
+text = "1"
 
 [node name="FrequencyContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -164,7 +138,8 @@ text = "Frequency"
 [node name="FrequencySlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 min_value = 0.01
 max_value = 0.5
 step = 0.0
@@ -172,6 +147,7 @@ value = 0.01
 
 [node name="FrequencyValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer"]
 clip_contents = true
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 text = "0.1"
 
@@ -185,13 +161,17 @@ text = "Octaves"
 [node name="OctavesSlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
 max_value = 10.0
+value = 1.0
 tick_count = 10
 ticks_on_borders = true
 
 [node name="OctavesValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer"]
 clip_contents = true
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 text = "1"
 
@@ -205,13 +185,15 @@ text = "Persistence"
 [node name="PersistenceSlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistenceContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 min_value = -4.0
 max_value = 4.0
 step = 0.001
 
 [node name="PersistenceValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistenceContainer"]
 clip_contents = true
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 text = "0.5"
 
@@ -225,13 +207,15 @@ text = "Lacunarity"
 [node name="LacunaritySlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 min_value = -1.0
 max_value = 1.0
 step = 0.001
 
 [node name="LacunarityValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer"]
 clip_contents = true
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 text = "0.5"
 
@@ -249,7 +233,8 @@ text = "x:"
 [node name="XSlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
 max_value = 1000.0
 
 [node name="XOffsetValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
@@ -269,7 +254,8 @@ text = "y:"
 [node name="YSlider" type="HSlider" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
 max_value = 1000.0
 
 [node name="YOffsetValueLabel" type="Label" parent="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer"]
@@ -301,6 +287,40 @@ alignment = 1
 layout_mode = 2
 text = "Save Image .png"
 
+[node name="Color" type="TabBar" parent="MainInterface/HBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Color"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="MainInterface/HBoxContainer/TabContainer/Color/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="ColorInterfaceContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Color/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorListContainer" type="VBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Color/VBoxContainer/ColorInterfaceContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainInterface/HBoxContainer/TabContainer/Color/VBoxContainer"]
+layout_mode = 2
+
+[node name="AddColorButton" type="Button" parent="MainInterface/HBoxContainer/TabContainer/Color/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Color"
+
 [node name="Control" type="Control" parent="MainInterface/HBoxContainer"]
 clip_contents = true
 layout_mode = 2
@@ -315,23 +335,21 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
+[connection signal="update_noise" from="MainInterface" to="MainInterface/NoiseImageGenerator" method="_update_noise"]
 [connection signal="item_selected" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/NoiseTypeContainer/NoiseTypeOptionButton" to="MainInterface/NoiseImageGenerator" method="_noise_type_changed"]
 [connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/WidthContainer/WidthLineEdit" to="MainInterface/NoiseImageGenerator" method="_width_changed"]
 [connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/HeightContainer/HeightLineEdit" to="MainInterface/NoiseImageGenerator" method="_height_changed"]
-[connection signal="text_submitted" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SeedContainer/SeedLineEdit" to="MainInterface/NoiseImageGenerator" method="_seed_changed"]
+[connection signal="text_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SeedContainer/SeedLineEdit" to="MainInterface/NoiseImageGenerator" method="_seed_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer/AmplitudeSlider" to="MainInterface" method="_amplitude_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/AmplitudeContainer/AmplitudeSlider" to="MainInterface/NoiseImageGenerator" method="_amplitude_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer/FrequencySlider" to="MainInterface" method="_frequency_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/FrequencyContainer/FrequencySlider" to="MainInterface/NoiseImageGenerator" method="_frequency_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer/OctavesSlider" to="MainInterface" method="_octaves_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OctavesContainer/OctavesSlider" to="MainInterface/NoiseImageGenerator" method="_octaves_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistenceContainer/PersistenceSlider" to="MainInterface" method="_persistence_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/PersistenceContainer/PersistenceSlider" to="MainInterface/NoiseImageGenerator" method="_persistence_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer/LacunaritySlider" to="MainInterface" method="_lacunarity_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/LacunarityContainer/LacunaritySlider" to="MainInterface/NoiseImageGenerator" method="_lacunarity_slider"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/XSlider" to="MainInterface" method="_x_offset_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/XSlider" to="MainInterface/NoiseImageGenerator" method="_x_changed"]
 [connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/YSlider" to="MainInterface" method="_y_offset_changed"]
-[connection signal="value_changed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/OffsetContainer/YSlider" to="MainInterface/NoiseImageGenerator" method="_y_changed"]
 [connection signal="toggled" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/InvertedContainer/InvertedCheckBox" to="MainInterface/NoiseImageGenerator" method="_inverted_changed"]
 [connection signal="pressed" from="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SavePngContainer/SavePngButton" to="MainInterface" method="_save_button_pressed"]
+[connection signal="pressed" from="MainInterface/HBoxContainer/TabContainer/Color/VBoxContainer/HBoxContainer/AddColorButton" to="MainInterface" method="_add_color_container"]
+
+[editable path="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/NoiseTypeContainer"]
+[editable path="MainInterface/HBoxContainer/TabContainer/Properties/HBoxContainer/VBoxContainer/SeedContainer"]
